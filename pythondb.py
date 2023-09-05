@@ -6,7 +6,7 @@ def db_connection():
         conn = psycopg2.connect(
             host="localhost",
             port="5432",  # Usually port number 5432 for PostgreSQL
-            database="phonedb",
+            database="dictdb",
             user="postgres",
             password="18@Rameez22"  # Replace with your own password
         )

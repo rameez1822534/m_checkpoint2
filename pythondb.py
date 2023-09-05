@@ -24,7 +24,14 @@ cur.close()
 dbconn.close()
 return rows
 
-while True: ## REPL - Read Execute Program Loop
-    cmd = input("Command: ")
-if cmd == "quit":
-    exit()
+while True: 
+    cmd = input("Command (list, add, delete, quit): ").strip().lower()
+    
+    if cmd == "quit":
+        break
+    elif cmd == "list":
+        # List words and translations
+        word_list = read_dict()
+        for word in word_list:
+            print(f"ID: {word[0]}, Word: {word[1]}, Translation: {word[2]}")
+

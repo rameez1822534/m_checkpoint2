@@ -24,30 +24,36 @@ cur.close()
 dbconn.close()
 return rows
 
-while True: 
+def insert_translation(word, translation):
+    dbconn = db_connection()
+    cur = dbconn.cursor()
+    try:
+        
+        cur.execute("INSERT INTO dictionary (word, translation) VALUES (%s, %s);", (word, translation))
+        dbconn.commit()
+        cur.close()
+        dbconn.close()
+        print("Translation added successfully.")
+    except Exception as e:
+        dbconn.rollback()
+        cur.close()
+        dbconn.close()
+        print(f"Error inserting translation: {e}")
+
+while True:
     cmd = input("Command (list, add, delete, quit): ").strip().lower()
     
     if cmd == "quit":
         break
     elif cmd == "list":
-        # List words and translations
         word_list = read_dict()
         for word in word_list:
             print(f"ID: {word[0]}, Word: {word[1]}, Translation: {word[2]}")
     elif cmd == "add":
-        # Add a new word and translation
         new_word = input("Enter the new word: ")
         new_translation = input("Enter the translation: ")
-        
-        dbconn = db_connection()
-        cur = dbconn.cursor()
-        cur.execute("INSERT INTO dictionary (word, translation) VALUES (%s, %s);", (new_word, new_translation))
-        dbconn.commit()
-        cur.close()
-        dbconn.close()
-        print("Word and translation added successfully.")
+        insert_translation(new_word, new_translation)
     elif cmd == "delete":
-        # Delete a word by ID
         word_id = input("Enter the ID of the word to delete: ")
         
         dbconn = db_connection()

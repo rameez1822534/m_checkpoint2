@@ -58,6 +58,7 @@ while True:
     if cmd == "quit":
         break
     elif cmd == "list":
+        # No need to pass any parameters to read_dict
         word_list = read_dict()
         for word in word_list:
             print(f"ID: {word[0]}, Word: {word[1]}, Translation: {word[2]}")

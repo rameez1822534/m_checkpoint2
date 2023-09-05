@@ -34,4 +34,29 @@ while True:
         word_list = read_dict()
         for word in word_list:
             print(f"ID: {word[0]}, Word: {word[1]}, Translation: {word[2]}")
+    elif cmd == "add":
+        # Add a new word and translation
+        new_word = input("Enter the new word: ")
+        new_translation = input("Enter the translation: ")
+        
+        dbconn = db_connection()
+        cur = dbconn.cursor()
+        cur.execute("INSERT INTO dictionary (word, translation) VALUES (%s, %s);", (new_word, new_translation))
+        dbconn.commit()
+        cur.close()
+        dbconn.close()
+        print("Word and translation added successfully.")
+    elif cmd == "delete":
+        # Delete a word by ID
+        word_id = input("Enter the ID of the word to delete: ")
+        
+        dbconn = db_connection()
+        cur = dbconn.cursor()
+        cur.execute("DELETE FROM dictionary WHERE id = %s;", (word_id,))
+        dbconn.commit()
+        cur.close()
+        dbconn.close()
+        print("Word deleted successfully.")
+    else:
+        print("Invalid command. Please use 'list', 'add', 'delete', or 'quit'.")
 

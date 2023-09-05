@@ -12,3 +12,8 @@ rows = cur.fetchall()
 cur.close()
 dbconn.close()
 return rows
+
+while True: ## REPL - Read Execute Program Loop
+cmd = input("Command: ")
+if cmd == "quit":
+exit()

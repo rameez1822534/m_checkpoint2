@@ -40,6 +40,18 @@ def insert_translation(word, translation):
         dbconn.close()
         print(f"Error inserting translation: {e}")
 
+def delete_word(word_id):
+    dbconn = db_connection()
+    if dbconn:
+        cur = dbconn.cursor()
+        cur.execute("DELETE FROM dictionary WHERE id = %s;", (word_id,))
+        dbconn.commit()
+        cur.close()
+        dbconn.close()
+        print("Word deleted successfully.")
+    else:
+        print("Unable to connect to the database. Check your database settings.")
+
 while True:
     cmd = input("Command (list, add, delete, quit): ").strip().lower()
     
@@ -51,18 +63,12 @@ while True:
             print(f"ID: {word[0]}, Word: {word[1]}, Translation: {word[2]}")
     elif cmd == "add":
         new_word = input("Enter the new word: ")
-        new_translation = input("Enter the translation: ")
+        new_translation= input("Enter the translation: ")
         insert_translation(new_word, new_translation)
     elif cmd == "delete":
-        word_id = input("Enter the ID of the word to delete: ")
-        
-        dbconn = db_connection()
-        cur = dbconn.cursor()
-        cur.execute("DELETE FROM dictionary WHERE id = %s;", (word_id,))
-        dbconn.commit()
-        cur.close()
-        dbconn.close()
-        print("Word deleted successfully.")
+        del_word = input("Enter the  word to delete: ")
+        new_deletion = input("Enter the translation: ")
+        delete_word(new_word, new_new_deletion)
     else:
         print("Invalid command. Please use 'list', 'add', 'delete', or 'quit'.")
 

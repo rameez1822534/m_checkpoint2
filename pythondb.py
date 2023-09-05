@@ -17,12 +17,12 @@ def db_connection():
 
 def read_dict():    
     dbconn = db_connection()
-cur = dbconn.cursor()
-cur.execute("SELECT id, word, translation FROM dictionary;")
-rows = cur.fetchall()
-cur.close()
-dbconn.close()
-return rows
+    cur = dbconn.cursor()
+    cur.execute("SELECT id, word, translation FROM dictionary;")
+    rows = cur.fetchall()
+    cur.close()
+    dbconn.close()
+    return rows
 
 def insert_translation(word, translation):
     dbconn = db_connection()

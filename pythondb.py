@@ -7,8 +7,6 @@ def db_connection():
             host="localhost",
             port="5432",  # Usually port number 5432 for PostgreSQL
             database="dictdb",
-            user="postgres",
-            password="18@Rameez22"  # Replace with your own password
         )
         return conn
     except Exception as e:
